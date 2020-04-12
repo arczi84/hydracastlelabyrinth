@@ -339,7 +339,12 @@ void optionsDraw()
 			// Music type
 			PHL_DrawTextBold("MUSIC", xleft, ydraw, YELLOW);
 			if (getMusicType() == 1) {
+#ifdef __amigaos__
+				PHL_DrawTextBold("AIFF", xright, ydraw, YELLOW);
+#else
 				PHL_DrawTextBold("OGG", xright, ydraw, YELLOW);
+#endif
+
 			}
 			else{
 				PHL_DrawTextBold("MIDI", xright, ydraw, YELLOW);
@@ -353,6 +358,7 @@ void optionsDraw()
 			PHL_DrawTextBold(buff, xright, ydraw, YELLOW);
 			ydraw += ystep;
 			optioncount++;
+#ifndef __amigaos__
 			// xBRZ scaling
 			PHL_DrawTextBold("XBRZ", xleft, ydraw, YELLOW);
 			if (getXBRZ() == 1) {
@@ -361,6 +367,7 @@ void optionsDraw()
 			else{
 				PHL_DrawTextBold("OFF", xright, ydraw, YELLOW);
 			}
+#endif
 			ydraw += ystep;
 			optioncount++;
 		#endif

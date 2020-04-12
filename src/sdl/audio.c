@@ -7,10 +7,10 @@ int music_volume = 4;
 void PHL_AudioInit()
 {
     SDL_InitSubSystem(SDL_INIT_AUDIO);
-    #ifndef __MORPHOS__
+    #if !defined (__MORPHOS__) && !defined (__amigaos__)
     Mix_Init(MIX_INIT_OGG); // midi is on by default
     #endif
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
+    Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
 
     PHL_MusicVolume(0.25f * music_volume);
 }
@@ -18,7 +18,7 @@ void PHL_AudioInit()
 void PHL_AudioClose()
 {
     Mix_CloseAudio();
-    #ifndef __MORPHOS__
+	#if !defined (__MORPHOS__) && !defined (__amigaos__)
     Mix_Quit();
     #endif
 }
@@ -31,7 +31,7 @@ PHL_Music PHL_LoadMusic(char* fname, int loop)
     char buff[4096];
     strcpy(buff, "data/");
     strcat(buff, fname);
-    strcat(buff, getMusicType()?".ogg":".mid");
+    strcat(buff, getMusicType()?".aiff":".mid");
     ret.snd = Mix_LoadMUS(buff);
     return ret;
 }

@@ -27,7 +27,7 @@ void iniInit()
 	char fullPath[128];
 	{
 		#ifdef _SDL
-		#if defined(__amigaos4__) || defined(__MORPHOS__)
+		#if defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 		strcpy(fullPath, "PROGDIR:.hydracastlelabyrinth/");
 		#elif defined(EMSCRIPTEN)
 		strcpy(fullPath, "hcl_data/");
@@ -63,7 +63,7 @@ void saveSettings()
 	char fullPath[128];
 	{
 		#ifdef _SDL
-		#if defined(__amigaos4__) || defined(__MORPHOS__)
+		#if defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 		strcpy(fullPath, "PROGDIR:.hydracastlelabyrinth/");
 		#elif defined(EMSCRIPTEN)
 		strcpy(fullPath, "hcl_data/");
@@ -146,7 +146,7 @@ void saveSettings()
 
 		#ifdef _SDL
 		fprintf(f, "\r\n[audio]");
-		fprintf(f, "\r\nmusic_type=%s", getMusicType()?"ogg":"midi");
+		fprintf(f, "\r\nmusic_type=%s", getMusicType()?"aiff":"midi");
 		fprintf(f, "\r\nmusic=%d", music_volume);
 		// Audio
 		#endif
@@ -167,7 +167,7 @@ void loadSettings()
 	char fullPath[128];
 	{
 		#ifdef _SDL
-		#if defined(__amigaos4__) || defined(__MORPHOS__)
+		#if defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 		strcpy(fullPath, "PROGDIR:.hydracastlelabyrinth/");
 		#elif defined(EMSCRIPTEN)
 		strcpy(fullPath, "hcl_data/");
@@ -378,8 +378,8 @@ void musictypeLoad(char* first, char* second)
 {
 	#ifdef _SDL
 	if (strcmp(first, "music_type") == 0) {
-		if (strcmp(second, "ogg") == 0) {
-			setXBRZ(1);
+		if (strcmp(second, "aiff") == 0) {
+			setXBRZ(0);
 		}
 		if (strcmp(second, "midi") == 0) {
 			setXBRZ(0);

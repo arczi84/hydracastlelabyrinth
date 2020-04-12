@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#if defined(__amigaos4__) || defined(__MORPHOS__)
+#if defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 #include "amigaos.h"
 #endif
 
@@ -49,7 +49,7 @@ int initQDA()
 						memcpy(&headers[i].size, &QDAFile[offset + 4], 4);
 						memcpy(&headers[i].bytes, &QDAFile[offset + 8], 4);
 						memcpy(&headers[i].fileName, &QDAFile[offset + 12], 0x100);
-						#if defined(__amigaos4__) || defined(__MORPHOS__)
+						#if defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 						BE32(&headers[i].offset);
 						BE32(&headers[i].size);
 						BE32(&headers[i].bytes);

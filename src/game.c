@@ -221,7 +221,7 @@ void em_loop_fn(void* arg)
 void game()
 {
 #ifdef _SDL
-	#if defined(__amigaos4__) || defined(__MORPHOS__)
+	#if defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 	const char* home = "PROGDIR:";
 	#elif defined(EMSCRIPTEN)
 	const char* home = "hcl_data/";
@@ -231,7 +231,7 @@ void game()
 	if(home) 
 	{
 		strcpy(savename, home);
-		#if defined(__amigaos4__) || defined(__MORPHOS__)
+		#if defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 		strcat(savename, ".hydracastlelabyrinth/");
 		#elif !defined(EMSCRIPTEN)
 		strcat(savename, "/.hydracastlelabyrinth/");
@@ -1157,7 +1157,7 @@ void loadScreen()
 		strcpy(dest, "");
 		#ifdef _3DS
 			strcat(dest, "romfs:/map/");
-		#elif defined(__amigaos4__) || defined(__MORPHOS__)
+		#elif defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 			strcat(dest, "PROGDIR:data/map/");
 		#elif defined(_SDL)
 			strcat(dest, "data/map/");
@@ -1252,7 +1252,7 @@ void loadScreen()
 	char dest[30];
 	#ifdef _3DS
 		strcpy(dest, "romfs:/obj/");
-	#elif defined(__amigaos4__) || defined(__MORPHOS__)
+	#elif defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 		strcpy(dest, "PROGDIR:data/obj/");
 	#elif defined(_SDL)
 		strcpy(dest, "data/obj/");
@@ -1655,7 +1655,7 @@ int writeSave(char* fname)
 		int size = 4548;
 		unsigned char* memblock = (unsigned char*)malloc(size);
 		memset(memblock, 0, size);
-		#if defined(__amigaos4__) || defined(__MORPHOS__)
+		#if defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 		#define D 3
 		#else
 		#define D 0

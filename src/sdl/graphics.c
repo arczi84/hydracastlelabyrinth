@@ -4,7 +4,7 @@
 #include "../qda.h"
 #include "graphics.h"
 #include "scale.h"
-#if defined(__amigaos4__) || defined(__MORPHOS__)
+#if defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 #include "../amigaos.h"
 #endif
 
@@ -59,14 +59,16 @@ void PHL_GraphicsInit()
 	SDL_ShowCursor(SDL_DISABLE);
 
 	Input_InitJoystick();
-    	#ifdef __MORPHOS__
+	#if defined(__amigaos__) || defined(__MORPHOS__)
 		uint32_t flags = SDL_SWSURFACE;
 	#else
     		uint32_t flags = SDL_HWSURFACE|SDL_DOUBLEBUF;
 	#endif
 	if(wantFullscreen || desktopFS)
     	flags |= SDL_FULLSCREEN;
-    screen = SDL_SetVideoMode((desktopFS)?0:screenW, (desktopFS)?0:screenH, 0, flags);
+   // screen = SDL_SetVideoMode((desktopFS)?0:screenW, (desktopFS)?0:screenH, 0, flags);
+    screen = SDL_SetVideoMode(screenW, screenH, 16, flags);
+
 	if(desktopFS)
 	{
 		const SDL_VideoInfo* infos = SDL_GetVideoInfo();
@@ -84,7 +86,7 @@ void PHL_GraphicsInit()
 	
 	drawbuffer = screen;
 	drawscreen = 1;
-	backbuffer = SDL_CreateRGBSurface(0, 320*screenScale, 240*screenScale, 32, 0, 0, 0, 0);
+	backbuffer = SDL_CreateRGBSurface(0, 320*screenScale, 240*screenScale, 16, 0, 0, 0, 0);
 	tframe = SDL_GetTicks();
 }
 
@@ -148,15 +150,15 @@ void PHL_ResetDrawbuffer()
 //PHL_RGB PHL_NewRGB(int r, int g, int b);
 void PHL_SetColorKey(PHL_Surface surf, int r, int g, int b)
 {
-    SDL_SetColorKey(surf, SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(surf->format, r, g, b));
+    SDL_SetColorKey(surf, SDL_SRCCOLORKEY/*|SDL_RLEACCEL*/, SDL_MapRGB(surf->format, r, g, b));
 }
 
 PHL_Surface PHL_NewSurface(int w, int h)
 {
 	if(getXBRZ())
-		return SDL_CreateRGBSurface(0, w, h, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+		return SDL_CreateRGBSurface(0, w, h, 16, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 	else
-    	return SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
+    	return SDL_CreateRGBSurface(0, w, h, 16, 0, 0, 0, 0);
 }
 void PHL_FreeSurface(PHL_Surface surf)
 {
@@ -180,7 +182,7 @@ PHL_Surface PHL_LoadBMP(int index)
 		//Read data from header
 		memcpy(&w, &QDAFile[18], 2);
 		memcpy(&h, &QDAFile[22], 2);
-		#if defined(__amigaos4__) || defined(__MORPHOS__)
+		#if defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 		BE16(&w); BE16(&h);
 		#endif
 		
@@ -248,9 +250,9 @@ PHL_Surface PHL_LoadBMP(int index)
 					if (dx == 0 && dy == 0) {					
 						//Darkness special case
 						if (index == 27) {
-							SDL_SetColorKey(surf, SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(surf->format, 0x00, 0x00, 0x00));
+							SDL_SetColorKey(surf, SDL_SRCCOLORKEY/*|SDL_RLEACCEL*/, SDL_MapRGB(surf->format, 0x00, 0x00, 0x00));
 						}else{
-							SDL_SetColorKey(surf, SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(surf->format, palette[0][0].r, palette[0][0].g, palette[0][0].b));
+							SDL_SetColorKey(surf, SDL_SRCCOLORKEY/*|SDL_RLEACCEL*/, SDL_MapRGB(surf->format, palette[0][0].r, palette[0][0].g, palette[0][0].b));
 						}
 					}
 					

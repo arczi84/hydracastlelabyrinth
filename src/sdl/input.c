@@ -105,22 +105,23 @@ void Input_KeyEvent(SDL_Event* evt)
 void Input_JoyAxisEvent(SDL_Event* evt) {
 	if(evt->jaxis.which!=0)
 		return;
-	#define DEADZONE 32
+	#define DEADZONE 1
 	if(evt->jaxis.axis==0) {
 		int v = (evt->jaxis.value)/256;
-		if(v>-DEADZONE & v<DEADZONE) axisX = 0;
-		else if(v<0) axisX = -1;
-		else axisX = +1;
+		if(v>-DEADZONE & v<DEADZONE) {axisX = 0;}
+		else if(v<0) { axisX = -1;}
+		else { axisX = +1;}
 	}
 	if(evt->jaxis.axis==1) {
 		int v = (evt->jaxis.value)/256;
-		if(v>-DEADZONE & v<DEADZONE) axisY = 0;
+		if(v>-DEADZONE & v<DEADZONE){ axisY = 0;}
 		else if(v<0) axisY = -1;
 		else axisY = +1;
 	}
 }
 
 void Input_JoyEvent(SDL_Event* evt) {
+
 	if(evt->jbutton.which!=0)
 		return;
 	int w = (evt->type==SDL_JOYBUTTONDOWN)?1:0;
@@ -148,6 +149,7 @@ void Input_JoyEvent(SDL_Event* evt) {
 */
 	switch(evt->jbutton.button)
 	{
+#if !defined(__m68k__)
 		case 0: jFaceDown = w; break;
 		case 1: jFaceLeft = w; break;
 		case 2: jFaceRight = w; break;
@@ -160,7 +162,19 @@ void Input_JoyEvent(SDL_Event* evt) {
 		case 13:jDown = w; break;
 		case 14:jLeft = w; break;
 		case 15:jRight = w; break;*/
+#else
+		case 0: jFaceDown = w; break;
+		case 4: jFaceLeft = w; break;
+		case 3: jFaceRight = w; break;
+		//case 3: jFaceUp = w; break;
+		case 6: jL = w; break;
+		case 5: jR = w; break;
+		case 2: jSelect = w; break;
+		case 1: jStart = w; break;
+#endif
 	}
+
+	//printf("przycisk nr %d\n", evt->jbutton.button);
 }
 
 void Input_JoyHatEvent(SDL_Event* evt) {

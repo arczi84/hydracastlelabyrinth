@@ -14,8 +14,11 @@
 #include <emscripten.h>
 #endif
 
-#ifdef __amigaos4__
+#if defined(__amigaos4__)
 static const char* __attribute__((used)) stackcookie = "$STACK: 1000000";
+#endif
+#if  defined(__amigaos__)
+static const char* __attribute__((used)) stackcookie = "$STACK: 100000";
 #endif
 #ifdef __MORPHOS__
 unsigned long __stack = 1000000;
@@ -33,7 +36,7 @@ void createSaveLocations()
 		mkdir("sdmc:/3ds/appdata/HydraCastleLabyrinth/map", 0777);
 	#elif defined(_SDL)
 		char buff[4096];
-		#if defined(__amigaos4__) || defined(__MORPHOS__)
+		#if defined(__amigaos4__) || defined(__MORPHOS__) || defined(__amigaos__)
 		strcpy(buff,"PROGDIR:.hydracastlelabyrinth");
 		#elif defined(EMSCRIPTEN)
 		strcpy(buff, "hcl_data");
@@ -82,7 +85,7 @@ int main(int argc, char **argv)
 		SDL_Delay(5000);
 		exit(EXIT_FAILURE);
 	}
-	#if defined(PANDORA) || defined(PYRA) || defined(CHIP) || defined(ODROID)
+	#if defined(PANDORA) || defined(PYRA) || defined(CHIP) || defined(ODROID) || defined(AMIGA)
 	wantFullscreen = 1;
 	#else
 	wantFullscreen = 0;
@@ -107,6 +110,8 @@ int main(int argc, char **argv)
 			wantFullscreen = 1;
 		if(!strcmp(argv[i], "--fullscreen"))
 			wantFullscreen = 1;
+		if(!strcmp(argv[i], "-w"))
+			wantFullscreen = 0;
 		if(!strcmp(argv[i], "-d"))
 			desktopFS = 1;
 		if(!strcmp(argv[i], "--desktop"))

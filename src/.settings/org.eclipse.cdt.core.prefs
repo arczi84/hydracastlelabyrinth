@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.1271480677/CWD/delimiter=;
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.1271480677/CWD/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.1271480677/CWD/value=D\:\\dev\\hydracastlelabyrinth\\src
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.1271480677/PATH/delimiter=;
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.1271480677/PATH/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.1271480677/PATH/value=D\:/dev/jdk-12.0.2/bin/server;D\:/dev/jdk-12.0.2/bin;C\:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C\:\\WINDOWS\\system32;C\:\\WINDOWS;C\:\\WINDOWS\\System32\\Wbem;C\:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;g\:\\amiga-gcc2\\bin;C\:\\WINDOWS\\System32\\OpenSSH\\;D\:\\dev\\msys64\\usr\\bin;;C\:\\Program Files\\NVIDIA Corporation\\NVIDIA NvDLISR;C\:\\WINDOWS\\system32;C\:\\WINDOWS;C\:\\WINDOWS\\System32\\Wbem;C\:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C\:\\WINDOWS\\System32\\OpenSSH\\;D\:\\Programy\\TortoiseSVN\\bin;C\:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C\:\\Users\\artur\\AppData\\Local\\Microsoft\\WindowsApps;D;C\:\\Users\\artur\\AppData\\Local\\GitHubDesktop\\bin;C\:\\WINDOWS\\System32;d\:\\dev\\msys64\\mingw64\\bin
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.1271480677/PWD/delimiter=;
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.1271480677/PWD/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.1271480677/PWD/value=D\:\\dev\\hydracastlelabyrinth\\build
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.1271480677/append=true
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.1271480677/appendContributed=true
